@@ -40,6 +40,3 @@ Services:
   - algorithm_celery - Flask uygulamasinda baslatilan train kodlarinin calistigi container. Cikti olarak olusan model ve vectorizer dosyalarini volume olarak tanimlamak gerekmektedir. Ayni volume algorithm container'ina da verilmelidir ki train olan pickle dosyalarini okuyup prediction calistirabilsin.
  - redis - algorithm ve algorithm_celery containerlari arasinda broker gorevi gorur
 
-NOTE
-====
-- Kodda anlasilmayan yer olmasi halinde mesai saatleri icerisinde erol.yaldir@etiya.com ile cekinmeden iletisime gecebilirsiniz.
