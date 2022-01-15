@@ -12,14 +12,15 @@ app.config["DEBUG"] = True
 
 @app.route('/train', methods=['GET'])
 def train():
-    file = open('algorithm.py', 'r').read()
-    print("train called")
-    return exec(file)
-    # return "<h1>this endpoint train algorithm.</p>"
+    # file = open('algorithm.py', 'r').read()
+    # print("train called")
+    # return exec(file)
+    return "<h1>this endpoint train algorithm.</p>"
 
-@app.route('/prediction', methods=['GET'])
-def prediction():
+@app.route('/prediction/<text>/', methods=['GET'])
+def prediction(text):
     # data = request.get_json()
-    return "<h1>this endpoint prediction algorithm.</p>"
+    print(text)
+    return text
 app.run()
 

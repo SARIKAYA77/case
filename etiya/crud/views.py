@@ -12,8 +12,8 @@ from django.shortcuts import redirect
 def Train(request):
        return redirect("http://127.0.0.1:5000/train")
 
-def Prediction(request):
-       return redirect("http://127.0.0.1:5000/prediction")
+def Prediction(request,text):
+       return redirect("http://127.0.0.1:5000/prediction/text")
 
 class ListDataAPIView(ListAPIView):
     """This endpoint list all of the available datas from the database"""
