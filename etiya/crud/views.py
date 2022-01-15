@@ -6,9 +6,14 @@ from rest_framework.generics import DestroyAPIView
 from rest_framework.generics import UpdateAPIView
 from crud.serializers import DataSerializer
 from crud.models import Data
+import requests
+from django.shortcuts import redirect
 
-# def index(request):
-#     return HttpResponse("TASK STARTED")
+def Train(request):
+       return redirect("http://127.0.0.1:5000/train")
+
+def Prediction(request):
+       return redirect("http://127.0.0.1:5000/prediction")
 
 class ListDataAPIView(ListAPIView):
     """This endpoint list all of the available datas from the database"""
@@ -29,3 +34,4 @@ class DeleteDataAPIView(DestroyAPIView):
     """This endpoint allows for deletion of a specific Data from the database"""
     queryset = Data.objects.all()
     serializer_class = DataSerializer
+    
