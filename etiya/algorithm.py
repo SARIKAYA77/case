@@ -55,7 +55,8 @@ def select_all_data(conn):
     print(label_list)
     return text_list, label_list
 
-
+# def test():
+#     print("bu bir test")
 
 #feature extraction - creating a tf-idf matrix
 def tfidf(data, ma = 0.6, mi = 0.0001):
@@ -89,25 +90,27 @@ def load_model(file_input):
 # file = "test_data.xlsx"
 # text, label = create_data(file)
 # print(text,label)
-conn = create_connection()
-text, label = select_all_data(conn)
-# TRAIN
-training, vectorizer = tfidf(text)
-print(training, vectorizer)
-import warnings
-warnings.filterwarnings('ignore')
+def start():
+    conn = create_connection()
+    text, label = select_all_data(conn)
+    # TRAIN
+    training, vectorizer = tfidf(text)
+    print(training, vectorizer)
+    import warnings
+    warnings.filterwarnings('ignore')
 
-x_train, x_test, y_train, y_test = train_test_split(training, label, test_size = 0.25, random_state = 0)
-model, accuracy, precision, recall = test_SVM(x_train, x_test, y_train, y_test)
-print(model,accuracy, precision, recall)
-result = dump_model(model, 'model.pickle')
-dump_model(vectorizer, 'vectorizer.pickle')
+    x_train, x_test, y_train, y_test = train_test_split(training, label, test_size = 0.25, random_state = 0)
+    model, accuracy, precision, recall = test_SVM(x_train, x_test, y_train, y_test)
+    print(model,accuracy, precision, recall)
+    result = dump_model(model, 'model.pickle')
+    dump_model(vectorizer, 'vectorizer.pickle')
+    model = load_model('model.pickle')
+    vectorizer = load_model('vectorizer.pickle')
+    return model, vectorizer
 
 # PREDICTION
-model = load_model('model.pickle')
-vectorizer = load_model('vectorizer.pickle')
-user_text = "whereafter"
-res = vectorizer.transform([user_text])
-
-result = model.predict_proba(res)
-print(result,"prediction")
+def prediction(user_text,model,vectorizer):
+    # user_text = "whereafter"
+    res = vectorizer.transform([user_text])
+    result = model.predict_proba(res)
+    return result

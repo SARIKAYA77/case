@@ -1,4 +1,4 @@
-import flask
+from flask import Flask, jsonify, make_response, request
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(
@@ -7,7 +7,7 @@ sys.path.append(os.path.abspath(os.path.join(
 import algorithm  # noqa
 
 
-app = flask.Flask(__name__)
+app = Flask(__name__)
 app.config["DEBUG"] = True
 
 @app.route('/train', methods=['GET'])

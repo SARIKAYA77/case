@@ -10,10 +10,12 @@ import requests
 from django.shortcuts import redirect
 
 def Train(request):
-       return redirect("http://127.0.0.1:5000/train")
+       response = requests.get("http://127.0.0.1:5000/train")
+       return HttpResponse(response.text)
 
 def Prediction(request,text):
-       return redirect("http://127.0.0.1:5000/prediction/text")
+       response = requests.get("http://127.0.0.1:5000/prediction/"+text)
+       return HttpResponse(response.text)
 
 class ListDataAPIView(ListAPIView):
     """This endpoint list all of the available datas from the database"""
