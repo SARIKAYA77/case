@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import pickle
 import sqlite3
+from pathlib import Path
 from sqlite3 import Error
 import time
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer, TfidfVectorizer
@@ -102,15 +103,14 @@ def start():
     x_train, x_test, y_train, y_test = train_test_split(training, label, test_size = 0.25, random_state = 0)
     model, accuracy, precision, recall = test_SVM(x_train, x_test, y_train, y_test)
     print(model,accuracy, precision, recall)
-    result = dump_model(model, 'model.pickle')
+    dump_model(model, 'model.pickle')
     dump_model(vectorizer, 'vectorizer.pickle')
-    model = load_model('model.pickle')
-    vectorizer = load_model('vectorizer.pickle')
-    return model, vectorizer
 
 # PREDICTION
-def prediction(user_text,model,vectorizer):
-    # user_text = "whereafter"
+def prediction(user_text):
+    # user_text = "whereafter"3
+    model = load_model('model.pickle')
+    vectorizer = load_model('vectorizer.pickle')
     res = vectorizer.transform([user_text])
     result = model.predict_proba(res)
     return result
