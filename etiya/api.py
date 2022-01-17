@@ -20,15 +20,17 @@ app.config["DEBUG"] = True
 @app.route('/train', methods=['GET'])
 def train():
     # file = open('algorithm.py', 'r').read()
-    # print("train called")
     # return exec(file)
-    return "<h1>this endpoint train algorithm.</p>"
+    print("train called")
+    result = algorithm.start()
+    return result
 
 @celery.task
 @app.route('/prediction/<text>/', methods=['GET'])
 def prediction(text):
-    # data = request.get_json()
-    print(text)
-    return jsonify({'success': True,'text': text})
+    prediction = algorithm.prediction(text)
+    print(prediction)
+    print(type(prediction))
+    return jsonify({'success': True,'prediction': prediction[0]})
 app.run()
 

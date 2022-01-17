@@ -105,12 +105,11 @@ def start():
     print(model,accuracy, precision, recall)
     dump_model(model, 'model.pickle')
     dump_model(vectorizer, 'vectorizer.pickle')
-
+    return "train completed"
 # PREDICTION
 def prediction(user_text):
-    # user_text = "whereafter"3
     model = load_model('model.pickle')
     vectorizer = load_model('vectorizer.pickle')
     res = vectorizer.transform([user_text])
-    result = model.predict_proba(res)
+    result = model.predict_proba(res).tolist()
     return result
