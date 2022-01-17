@@ -2,7 +2,6 @@ import pandas as pd
 import numpy as np
 import pickle
 import sqlite3
-from pathlib import Path
 from sqlite3 import Error
 import time
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer, TfidfVectorizer
@@ -10,11 +9,9 @@ from sklearn.model_selection import cross_validate
 from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
 from sklearn.metrics import precision_score, accuracy_score, recall_score
-
 import sys
 import os
-sys.path.append(os.path.abspath(os.path.join(
-    os.path.dirname(__file__),"..", "..",  "etiya")))
+
 
 # def create_data(file):
 #      df = pd.read_excel(file)
@@ -85,8 +82,7 @@ def dump_model(model, file_output):
 
 def load_model(file_input):
     return pickle.load(open(file_input, 'rb'))
-	
-	
+		
 # GET DATA
 # file = "test_data.xlsx"
 # text, label = create_data(file)
@@ -106,6 +102,7 @@ def start():
     dump_model(model, 'model.pickle')
     dump_model(vectorizer, 'vectorizer.pickle')
     return "train completed"
+
 # PREDICTION
 def prediction(user_text):
     model = load_model('model.pickle')
