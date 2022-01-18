@@ -31,6 +31,7 @@ def create_connection():
 
     return conn
 
+
 def select_all_data(conn):
     """
     Query all rows in the table
@@ -56,8 +57,10 @@ def select_all_data(conn):
 # def test():
 #     print("bu bir test")
 
-#feature extraction - creating a tf-idf matrix
-def tfidf(data, ma = 0.6, mi = 0.0001):
+# feature extraction - creating a tf-idf matrix
+
+
+def tfidf(data, ma=0.6, mi=0.0001):
     print(data)
     print("data")
     tfidf_vectorize = TfidfVectorizer()
@@ -65,28 +68,30 @@ def tfidf(data, ma = 0.6, mi = 0.0001):
     return tfidf_data, tfidf_vectorize
 
 
-#SVM classifier
+# SVM classifier
 def test_SVM(x_train, x_test, y_train, y_test):
-    SVM = SVC(kernel = 'linear', probability=True)
+    SVM = SVC(kernel='linear', probability=True)
     SVMClassifier = SVM.fit(x_train, y_train)
     predictions = SVMClassifier.predict(x_test)
     a = accuracy_score(y_test, predictions)
-    p = precision_score(y_test, predictions, average = 'weighted')
-    r = recall_score(y_test, predictions, average = 'weighted')
+    p = precision_score(y_test, predictions, average='weighted')
+    r = recall_score(y_test, predictions, average='weighted')
     return SVMClassifier, a, p, r
-
 
 
 def dump_model(model, file_output):
     pickle.dump(model, open(file_output, 'wb'))
 
+
 def load_model(file_input):
     return pickle.load(open(file_input, 'rb'))
-		
+
 # GET DATA
 # file = "test_data.xlsx"
 # text, label = create_data(file)
 # print(text,label)
+
+
 def start():
     conn = create_connection()
     text, label = select_all_data(conn)
@@ -96,14 +101,18 @@ def start():
     import warnings
     warnings.filterwarnings('ignore')
 
-    x_train, x_test, y_train, y_test = train_test_split(training, label, test_size = 0.25, random_state = 0)
-    model, accuracy, precision, recall = test_SVM(x_train, x_test, y_train, y_test)
-    print(model,accuracy, precision, recall)
+    x_train, x_test, y_train, y_test = train_test_split(
+        training, label, test_size=0.25, random_state=0)
+    model, accuracy, precision, recall = test_SVM(
+        x_train, x_test, y_train, y_test)
+    print(model, accuracy, precision, recall)
     dump_model(model, 'model.pickle')
     dump_model(vectorizer, 'vectorizer.pickle')
     return "train completed"
 
 # PREDICTION
+
+
 def prediction(user_text):
     model = load_model('model.pickle')
     vectorizer = load_model('vectorizer.pickle')
