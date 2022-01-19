@@ -2,11 +2,13 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.signals import request_finished
 from django.dispatch import receiver
+from rest_framework.filters import SearchFilter,OrderingFilter
 from rest_framework.generics import (ListAPIView,
                                      CreateAPIView,
                                      UpdateAPIView,
                                      DestroyAPIView)
 from crud.serializers import DataSerializer
+from crud.paginations import DataPagination
 from crud.models import Data
 from rest_framework.mixins import DestroyModelMixin, RetrieveModelMixin
 import requests
@@ -19,7 +21,7 @@ def Train(request):
 
 
 @receiver(request_finished)
-def get_train(sender, **kwargs):
+def get_request(sender, **kwargs):
     print("reqeust finished")
 
 
@@ -32,7 +34,10 @@ class ListDataAPIView(ListAPIView):
     """This endpoint list all of the available datas from the database"""
     queryset = Data.objects.all()
     serializer_class = DataSerializer
-
+    pagination_class = DataPagination
+    filter_backends = [SearchFilter,OrderingFilter]
+    search_fields = ['text','label']
+    
 
 class CreateDataAPIView(CreateAPIView):
     """This endpoint allows for creation of a data"""
