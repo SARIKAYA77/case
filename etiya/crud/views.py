@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.signals import request_finished
 from django.dispatch import receiver
-from rest_framework.filters import SearchFilter,OrderingFilter
+from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.generics import (ListAPIView,
                                      CreateAPIView,
                                      UpdateAPIView,
@@ -35,9 +35,9 @@ class ListDataAPIView(ListAPIView):
     queryset = Data.objects.all()
     serializer_class = DataSerializer
     pagination_class = DataPagination
-    filter_backends = [SearchFilter,OrderingFilter]
-    search_fields = ['text','label']
-    
+    filter_backends = [SearchFilter, OrderingFilter]
+    search_fields = ['text', 'label']
+
 
 class CreateDataAPIView(CreateAPIView):
     """This endpoint allows for creation of a data"""

@@ -9,7 +9,7 @@ class apitest(APITestCase):
     def createTest(self):
         url = reverse("crud_create")
         data = {"text": "test", "label": "test"}
-        response = self.client.post(url,data, format='json')
+        response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, 201)
 
     def listTest(self):
