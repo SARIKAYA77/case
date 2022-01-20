@@ -1,4 +1,4 @@
-- Projede istenen backend ekibinin bir gorevi olarak algoritma implementasyonunu uctan uca tamamlamakdir
+- Projede istenen backend ekibinin bir gorevi olarak algoritma implementasyonunu uctan uca tamamlamaktir
 - algorithm.py ornek olarak Machine Learning ekibinden iletilen classification kodunu icermektedir.
 - Kodun icerisinde ornek bir datayi file'dan okuyan bir kod blogu
 - Datayi train eden bir kod blogu
