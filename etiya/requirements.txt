@@ -1,5 +1,6 @@
 appdirs==1.4.3     
-asgiref==3.4.1     
+asgiref==3.4.1 
+flask==2.0.2    
 backports.zoneinfo==0.2.1     
 CacheControl==0.12.6    
 certifi==2019.11.28
